@@ -6,8 +6,6 @@ public class QuadraticEquationSolver {
     public static void main(String[] args) {
         if (args.length == 0) {
             interactiveMode();
-        } else if (args.length == 1) {
-            fileMode(args[0]);
         } else {
             System.out.println("Error. Invalid number of arguments.");
         }
@@ -19,29 +17,6 @@ public class QuadraticEquationSolver {
         double b = getValidCoefficient(scanner, "b");
         double c = getValidCoefficient(scanner, "c");
         solveAndPrintEquation(a, b, c);
-    }
-
-    private static void fileMode(String filePath) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            String content = reader.readLine().trim();
-            reader.close();
-            String[] parts = content.split(" ");
-            if (parts.length != 3) throw new IllegalArgumentException("invalid file format");
-
-            double a = Double.parseDouble(parts[0]);
-            double b = Double.parseDouble(parts[1]);
-            double c = Double.parseDouble(parts[2]);
-
-            if (a == 0) throw new IllegalArgumentException("a cannot be 0");
-            solveAndPrintEquation(a, b, c);
-        } catch (NoSuchFileException e) {
-            System.out.println("file " + filePath + " does not exist");
-            System.exit(1);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
     }
 
     private static double getValidCoefficient(Scanner scanner, String coeffName) {
