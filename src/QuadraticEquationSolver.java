@@ -4,6 +4,30 @@ import java.util.*;
 
 public class QuadraticEquationSolver {
     public static void main(String[] args) {
+        if (args.length == 0) {
+            interactiveMode();
+        } else {
+            System.out.println("Error. Invalid number of arguments.");
+        }
+    }
+
+    private static void interactiveMode() {
+        Scanner scanner = new Scanner(System.in);
+        double a = getValidCoefficient(scanner, "a");
+        double b = getValidCoefficient(scanner, "b");
+        double c = getValidCoefficient(scanner, "c");
+        solveAndPrintEquation(a, b, c);
+    }
+
+    private static double getValidCoefficient(Scanner scanner, String coeffName) {
+        while (true) {
+            System.out.print(coeffName + " = ");
+            try {
+                return Double.parseDouble(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Error. Expected a valid real number.");
+            }
+        }
     }
 
     private static void solveAndPrintEquation(double a, double b, double c) {
